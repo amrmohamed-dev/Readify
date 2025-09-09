@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import queryString from 'qs';
+import authRouter from './src/modules/auth/auth.route.js';
 import userRouter from './src/modules/user/user.route.js';
 import categoryRouter from './src/modules/category/category.route.js';
 import bookRouter from './src/modules/book/book.route.js';
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.set('query parser', (query) => queryString.parse(query));
 
+app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/books', bookRouter);
