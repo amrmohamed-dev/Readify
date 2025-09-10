@@ -7,41 +7,44 @@ import createSendEmail from '../../emails/services/emailHelper.js';
 import * as authService from './auth.service.js';
 
 const register = catchAsync(async (req, res, next) => {
-  try {
-    const { firstName, secondName, email, password, passwordConfirm } =
-      req.body;
-    const user = await User.create({
-      firstName,
-      secondName,
-      email,
-      password,
-      passwordConfirm,
-    });
-    const verificationToken = user.generateEmailVerificationToken();
-    await user.save({ validateBeforeSave: false });
-    const verifyEmailUrl = `${req.protocol}://${req.get('host')}/api/v1/auth/verify-email/${verificationToken}`;
-    const options = {
-      name: user.firstName,
-      email,
-      subject: 'Email Confirmation',
-      url: verifyEmailUrl,
-      template: 'verifyEmail',
-    };
-    await createSendEmail(options, user, [
-      'emailVerification.token',
-      'emailVerification.tokenExpires',
-    ]);
-    authService.createSendToken(
-      user,
-      201,
-      res,
-      'We have sent a verification link to your email. Please check your inbox and spam folder.',
+  const { firstName, secondName, email, password, passwordConfirm } =
+    req.body;
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return next(
+      new AppError(
+        'An account with this email already exists. Please login instead.',
+        409,
+      ),
     );
-  } catch (err) {
-    if (err.code === 11000) {
-      return next(new AppError('Email is already in use.', 409));
-    }
   }
+  const user = await User.create({
+    firstName,
+    secondName,
+    email,
+    password,
+    passwordConfirm,
+  });
+  const verificationToken = user.generateEmailVerificationToken();
+  await user.save({ validateBeforeSave: false });
+  const verifyEmailUrl = `${req.protocol}://${req.get('host')}/api/v1/auth/verify-email/${verificationToken}`;
+  const options = {
+    name: user.firstName,
+    email,
+    subject: 'Email Confirmation',
+    url: verifyEmailUrl,
+    template: 'verifyEmail',
+  };
+  await createSendEmail(options, user, [
+    'emailVerification.token',
+    'emailVerification.tokenExpires',
+  ]);
+  authService.createSendToken(
+    user,
+    201,
+    res,
+    'We have sent a verification link to your email. Please check your inbox and spam folder.',
+  );
 });
 
 const resendVerificationLink = catchAsync(async (req, res, next) => {
