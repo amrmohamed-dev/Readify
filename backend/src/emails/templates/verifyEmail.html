@@ -2,102 +2,73 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Email Verification</title>
-    <link
-      href="https://api.fontshare.com/v2/css?f[]=chillax@300,400,500,700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        font-family: 'Chillax', Arial, Helvetica, sans-serif;
-        background-color: #202225;
-        margin: 0;
-        padding: 0;
-        color: #ffffff;
-      }
-      .container {
-        max-width: 600px;
-        margin: 20px auto;
-        background: #2c2f33;
-        padding: 30px 20px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-        text-align: center;
-      }
-      .logo {
-        max-width: 60px;
-        margin-bottom: 15px;
-      }
-      h2 {
-        font-size: 22px;
-        margin-bottom: 10px;
-      }
-      p {
-        line-height: 1.6;
-        margin: 10px 0;
-      }
-      .btn {
-        display: inline-block;
-        padding: 14px 28px;
-        color: #ffffff !important;
-        background-color: #007bff;
-        text-decoration: none;
-        border-radius: 8px;
-        margin-top: 20px;
-        font-weight: bold;
-        transition: background 0.3s ease;
-      }
-      .btn:hover {
-        background-color: #0056b3;
-      }
-      .alt-link {
-        margin-top: 20px;
-        font-size: 14px;
-        color: #cccccc;
-        word-break: break-all;
-      }
-      .footer {
-        margin-top: 30px;
-        font-size: 12px;
-        color: #aaaaaa;
-      }
-      @media (max-width: 600px) {
-        h2 {
-          font-size: 20px;
-        }
-        .btn {
-          display: block;
-          width: 100%;
-          padding: 12px;
-        }
-      }
-    </style>
   </head>
-  <body>
-    <div class="container">
-      <img
-        src="https://res.cloudinary.com/dudarfssg/image/upload/v1757260623/readify_logo_m8xczt.png"
-        alt="Readify Logo"
-        class="logo"
-      />
-      <h2>Email Verification</h2>
-      <p>Hello {{name}},</p>
-      <p>
-        Thank you for signing up! Please verify your email address by clicking
-        the button below.
-      </p>
-      <a href="{{verifyEmailUrl}}" class="btn">Verify Email</a>
+  <body style="margin:0; padding:0; background-color:#202225; font-family: Arial, Helvetica, sans-serif; color:#ffffff;">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr>
+        <td align="center" style="padding:20px 0;">
+          <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" style="max-width:600px; background:#2c2f33; border-radius:12px; padding:30px 20px; text-align:center;">
+            
+            <tr>
+              <td style="padding-bottom:30px;">
+                <img 
+                  src="https://res.cloudinary.com/dudarfssg/image/upload/c_crop,ar_16:9/v1757495999/readify_logo_2_1_xiihak.png" 
+                  alt="Readify Logo" 
+                  width="150" 
+                  height="auto"
+                  style="display:block; margin:0 auto;" 
+                />
+                <div style="color:#bbb; font-size:12px; margin-top:5px; letter-spacing:2px;">
+                  READIFY
+                </div>
+              </td>
+            </tr>
 
-      <div class="alt-link">
-        If the button doesn't work, copy and paste this link into your browser: <br />
-        {{verifyEmailUrl}}
-      </div>
+            <tr>
+              <td style="font-size:22px; font-weight:bold; padding-bottom:10px; color:#ffffff;">
+                Email Verification
+              </td>
+            </tr>
 
-      <div class="footer">
-        &copy; 2025 Readify. All rights reserved. <br />
-        You are receiving this email because you created an account on Readify.
-      </div>
-    </div>
+            <tr>
+              <td style="font-size:16px; line-height:1.6; color:#ffffff; padding:10px 0;">
+                Hello {{name}},
+              </td>
+            </tr>
+
+            <tr>
+              <td style="font-size:16px; line-height:1.6; color:#ffffff; padding:10px 0;">
+                Thank you for signing up! Please verify your email address by clicking the button below.
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:20px 0;">
+                <a href="{{verifyEmailUrl}}" 
+                   style="display:inline-block; padding:14px 28px; color:#ffffff; background-color:#007bff; text-decoration:none; border-radius:8px; font-weight:bold;">
+                  Verify Email
+                </a>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="font-size:14px; color:#cccccc !important; padding:10px 0; word-break:break-all;">
+                If the button doesn't work, copy and paste this link into your browser: <br />
+                <a href="{{verifyEmailUrl}}" style="color:#4da6ff; text-decoration:none;">{{verifyEmailUrl}}</a>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="font-size:12px; color:#aaaaaa !important; padding-top:30px;">
+                &copy; 2025 Readify. All rights reserved.<br/>
+                You are receiving this email because you recently created an account on Readify.
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>

@@ -1,4 +1,7 @@
-# 📚 Readify
+<p align="center">
+  <img src="https://res.cloudinary.com/dudarfssg/image/upload/c_crop,ar_16:9/v1757495999/readify_logo_2_1_xiihak.png" alt="Readify Logo" width="250"/>
+  <h1 style="text-align:center">READIFY</h1>
+</p>
 
 **Readify** is a library management system built with **Node.js** and **Express**, with plans to be extended into a fullstack application including a modern frontend UI.
 
@@ -16,9 +19,9 @@ Readify provides an online library platform where admins can manage books and us
 * [x] Centralized error handling
 * [ ] Book management (add, delete by admin)
 * [ ] User management (CRUD, profile, password reset)
-* [ ] Authentication & Authorization (JWT)
+* [x] Authentication & Authorization (JWT)
 * [ ] Upload files (image, pdf)
-* [ ] Role-based access control (Admin, User)
+* [x] Role-based access control (Admin, User)
 * [x] API features (search, filtering, pagination, sorting, projection)
 * [ ] Book preview system (read book in a small preview window)
 * [ ] Book download functionality

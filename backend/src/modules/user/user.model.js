@@ -14,8 +14,8 @@ const userSchema = new mongoose.Schema(
     secondName: {
       type: String,
       trim: true,
-      minlength: [3, 'Second name must be at least 3 characters.'],
       maxlength: [25, 'Second name must not exceed 25 characters.'],
+      default: '',
     },
     email: {
       type: String,
@@ -80,6 +80,19 @@ const userSchema = new mongoose.Schema(
   },
 );
 
+const hiddenFields = (doc, ret) => {
+  delete ret.__v;
+  delete ret.updatedAt;
+  delete ret.password;
+  delete ret.emailVerification;
+  delete ret.passwordReset;
+  delete ret.isActive;
+  return ret;
+};
+
+userSchema.set('toJSON', { transform: hiddenFields });
+userSchema.set('toObject', { transform: hiddenFields });
+
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
 
@@ -87,10 +100,10 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', function (next) {
   if (!this.isModified('password') || this.isNew) return next();
 
-  this.passwordChangedAt = Date.now() + 1000;
+  this.passwordChangedAt = Date.now() - 1000;
   next();
 });
 
@@ -121,6 +134,16 @@ userSchema.methods.generateEmailVerificationToken = function () {
     .digest('hex');
   this.emailVerification.tokenExpires = Date.now() + 10 * 60 * 1000;
   return verificationToken;
+};
+
+userSchema.methods.changedPasswordAfter = function (jwtTimestamps) {
+  if (this.passwordChangedAt) {
+    const passwordChangedTimestamps = Math.floor(
+      this.passwordChangedAt.getTime() / 1000,
+    );
+    return passwordChangedTimestamps > jwtTimestamps;
+  }
+  return false;
 };
 
 const User = mongoose.model('User', userSchema);
