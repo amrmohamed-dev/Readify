@@ -2,6 +2,8 @@ import express from 'express';
 import morgan from 'morgan';
 import queryString from 'qs';
 import cookieParser from 'cookie-parser';
+import mongoSanitize from './src/middlewares/mongoSanitize.js';
+import xssClean from './src/middlewares/xssClean.js';
 import authRouter from './src/modules/auth/auth.route.js';
 import userRouter from './src/modules/user/user.route.js';
 import categoryRouter from './src/modules/category/category.route.js';
@@ -17,7 +19,10 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use(cookieParser());
-app.use(express.json());
+app.use(express.json({ limit: '2mb' }));
+
+app.use(mongoSanitize);
+app.use(xssClean);
 
 app.set('query parser', (query) => queryString.parse(query));
 
