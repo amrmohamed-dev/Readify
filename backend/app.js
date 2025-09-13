@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import queryString from 'qs';
 import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 import mongoSanitize from './src/middlewares/mongoSanitize.js';
 import xssClean from './src/middlewares/xssClean.js';
 import authRouter from './src/modules/auth/auth.route.js';
@@ -19,6 +20,8 @@ app.enable('trust proxy');
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
+app.use(helmet());
 
 app.use(cookieParser());
 app.use(express.json({ limit: '2mb' }));
