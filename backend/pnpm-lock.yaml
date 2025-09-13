@@ -35,6 +35,9 @@ importers:
       qs:
         specifier: ^6.14.0
         version: 6.14.0
+      rate-limiter-flexible:
+        specifier: ^7.3.0
+        version: 7.3.0
       sanitize-html:
         specifier: ^2.17.0
         version: 2.17.0
@@ -1229,6 +1232,9 @@ packages:
   range-parser@1.2.1:
     resolution: {integrity: sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==}
     engines: {node: '>= 0.6'}
+
+  rate-limiter-flexible@7.3.0:
+    resolution: {integrity: sha512-0R5gYs0m+jLGqcE6wxuvht+zuch0h4Un+JqVCEWaQajJGCWU2HzY0IFDp8WS8NNqIpviJOLmkZ5VKmzW/8q5dA==}
 
   raw-body@3.0.1:
     resolution: {integrity: sha512-9G8cA+tuMS75+6G/TzW8OtLzmBDMo8p1JRxN5AZ+LAp8uxGA8V8GZm4GQ4/N5QNQEnLmg6SS7wyuSmbKepiKqA==}
@@ -2804,6 +2810,8 @@ snapshots:
       side-channel: 1.1.0
 
   range-parser@1.2.1: {}
+
+  rate-limiter-flexible@7.3.0: {}
 
   raw-body@3.0.1:
     dependencies:
