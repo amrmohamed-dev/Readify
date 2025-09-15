@@ -84,6 +84,7 @@ const hiddenFields = (doc, ret) => {
   delete ret.__v;
   delete ret.updatedAt;
   delete ret.password;
+  delete ret.passwordChangedAt;
   delete ret.emailVerification;
   delete ret.passwordReset;
   delete ret.isActive;
